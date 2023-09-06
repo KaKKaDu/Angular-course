@@ -6,13 +6,14 @@ import { AuthService } from "./auth.service";
 
 @Injectable()
 
-export class AuthGuard implements CanActivateFn{
+export class AuthGuard implements CanActivateFn {
 
   constructor(private authService: AuthService,private router: Router) {
 
   }
 
-  CanActivateFn(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+  canActivateFn(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
+  {
     return this.authService.isAuntificated()
     .then(
       (authenticated: boolean) => {
